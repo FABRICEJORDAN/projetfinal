@@ -52,7 +52,7 @@ if choix == 'Par type dhabitation':
 
     st.plotly_chart(fig2)
 
-    st.write(first.loc[:,['PropertyName',selected_option2]])
+    st.write(first.loc[:,['PropertyName',selected_option2,'YearBuilt']])
 elif choix == 'generalité':
     st.write('En général voici la quantité denergie consommé par type dhabitation')
     tp= po.groupby("BuildingType", as_index=False).agg({'Electricity(kBtu)': 'sum', 'NaturalGas(kBtu)': 'sum','SteamUse(kBtu)': 'sum'}).reset_index()
@@ -85,4 +85,4 @@ else:
 
     st.plotly_chart(fig2)
 
-    st.write(first.loc[:,['PropertyName',selected_option2]])
+    st.write(first.loc[:,['PropertyName',selected_option2,'YearBuilt']])

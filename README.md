@@ -5,7 +5,7 @@ L'application permet d'affficher des graphes qui permettent à leur tour de suiv
     
         
 ## 🛠️ Tech Stack
-- [React](https://streamlit.io/)
+- [Streamlit](https://streamlit.io/)
 
 ## 🛠️ Install Dependencies    
 ```bash
@@ -19,7 +19,12 @@ streamlit_folium
         import { pollution } from 'files
 | BuildingType | PrimaryPropertyBuildingtype | ... | GHGEmisions |
 ```
-        
+## 🛠️ Recupérer le projet avec:
+```bash
+git init.
+git clone https://github.com/FABRICEJORDAN/projetfinal
+```
+
 ## 🙇 Authors
 #### Fabrice et Sami
 

@@ -28,30 +28,31 @@ choix = st.radio(
     )
 if choix == 'Par type dhabitation':
     valeurs_uniques = po['BuildingType'].unique()
-
+    val = ['Electricity(kBtu)','NaturalGas(kBtu)','SteamUse(kBtu)']
     selected_option = st.selectbox('Selectionner un type dhabitation pour voir les les batiments les plus energivores', valeurs_uniques)
 
-    col1, col2, col3, col4, col5 = st.columns(5)
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.write('Je souhaite voir les')
     with col2:
         n = st.number_input("", value=6, step=1, format="%d")
     with col3:
         st.write("Habitations les plus énergivores")
+    with col4:
+        selected_option2 = st.selectbox('', val)
+    
 
     filtre = po[po['BuildingType'] == selected_option]
-    first=filtre.sort_values(by='Electricity(kBtu)', ascending=False)[:n]
+    first=filtre.sort_values(by=selected_option2, ascending=False)[:n]
 
     data2 = [
-        go.Scatter(x = first['PropertyName'], y=first["Electricity(kBtu)"], name='Quantité électricité utilisé', text=first["Electricity(kBtu)"]),
-        go.Scatter(x = first['PropertyName'], y = first["NaturalGas(kBtu)"], name='Quantité Gas utilisé', text=first["NaturalGas(kBtu)"]),
-        go.Scatter(x = first['PropertyName'], y = first["SteamUse(kBtu)"], name='Quantité vapeur utilisé', text=first["SteamUse(kBtu)"])
+        go.Scatter(x = first['PropertyName'], y=first[selected_option2], name='Quantité électricité utilisé', text=first[selected_option2])
     ]
     fig2 = go.Figure(data=data2)
 
     st.plotly_chart(fig2)
 
-    st.write(first.loc[:,['PropertyName','Electricity(kBtu)','NaturalGas(kBtu)','SteamUse(kBtu)']])
+    st.write(first.loc[:,['PropertyName',selected_option2]])
 elif choix == 'generalité':
     st.write('En général voici la quantité denergie consommé par type dhabitation')
     tp= po.groupby("BuildingType", as_index=False).agg({'Electricity(kBtu)': 'sum', 'NaturalGas(kBtu)': 'sum','SteamUse(kBtu)': 'sum'}).reset_index()
@@ -65,22 +66,23 @@ elif choix == 'generalité':
     st.plotly_chart(fig)
 
 else:
-    col1, col2, col3, col4, col5 = st.columns(5)
+    val = ['Electricity(kBtu)','NaturalGas(kBtu)','SteamUse(kBtu)']
+    col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.write('Je souhaite voir les')
     with col2:
         m = st.number_input("", value=6, step=1, format="%d")
     with col3:
         st.write("Habitations les plus énergivores")
+    with col4:
+        selected_option2 = st.selectbox('', val)
 
-    first=po.sort_values(by='Electricity(kBtu)', ascending=False)[:m]
+    first=po.sort_values(by=selected_option2, ascending=False)[:m]
     data2 = [
-        go.Scatter(x = first['PropertyName'], y=first["Electricity(kBtu)"], name='Quantité électricité utilisé', text=first["Electricity(kBtu)"]),
-        go.Scatter(x = first['PropertyName'], y = first["NaturalGas(kBtu)"], name='Quantité Gas utilisé', text=first["NaturalGas(kBtu)"]),
-        go.Scatter(x = first['PropertyName'], y = first["SteamUse(kBtu)"], name='Quantité vapeur utilisé', text=first["SteamUse(kBtu)"])
+        go.Scatter(x = first['PropertyName'], y=first[selected_option2], name='Quantité électricité utilisé', text=first[selected_option2])
     ]
     fig2 = go.Figure(data=data2)
 
     st.plotly_chart(fig2)
 
-    st.write(first.loc[:,['PropertyName','Electricity(kBtu)','NaturalGas(kBtu)','SteamUse(kBtu)']])
+    st.write(first.loc[:,['PropertyName',selected_option2]])

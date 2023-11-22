@@ -19,3 +19,6 @@ st.markdown(f'<h1 style="text-align: center; text-decoration: underline;font-siz
 st.write("➡️ Les données traités ont été récupéré dans la ville de SEATTLE en 2016")
 st.write("➡️ Le nombre de batiments evalués:", po['OSEBuildingID'].count())
 st.write("➡️ 3 types d'energie: gaz, vapeur, electricité")
+
+
+st.markdown(f'<p style="color:blue;text-align: center; font-size: 20px;margin:30px">{"Réalisé par Fabrice et SAMI, IA M2 DA"}</p>', unsafe_allow_html=True)
